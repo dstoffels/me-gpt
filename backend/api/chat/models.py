@@ -7,7 +7,7 @@ class Chat(models.Model):
 
 class Message(models.Model):
     ROLES = ["system", "user", "assistant"]
-    chat = models.ForeignKey(Chat, related_field="messages")
+    chat = models.ForeignKey(Chat, related_name="messages", on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=[(role, role) for role in ROLES])
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
