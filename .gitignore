@@ -1,0 +1,4 @@
+# Python
+.env
+venv/
+local_settings.py
