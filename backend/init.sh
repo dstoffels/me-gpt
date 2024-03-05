@@ -3,6 +3,7 @@
 # Load environment variables from .env file
 if [ -f api/.env ]; then
     export $(grep -v '^#' api/.env | xargs)
+    source api/.env
 fi
 
 
@@ -17,13 +18,20 @@ if [ ! -d "venv" ]; then
     python -m venv venv
 fi
 
-venv/Scripts/activate.bat
+source venv/Scripts/activate
 
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
+source venv/Scripts/activate
+
+echo "Making migrations..."
 python manage.py makemigrations
+
+echo "Migrating..."
 python manage.py migrate
+
+echo "Running dev server..."
 python manage.py runserver
 
 # echo

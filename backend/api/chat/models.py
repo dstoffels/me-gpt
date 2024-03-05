@@ -2,7 +2,9 @@ from django.db import models
 
 
 class Chat(models.Model):
-    pass
+    user = models.ForeignKey(
+        "users.User", related_name="chats", on_delete=models.CASCADE
+    )
 
 
 class Message(models.Model):
