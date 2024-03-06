@@ -6,7 +6,7 @@ class Chat(models.Model):
     user = models.ForeignKey(
         "users.User", related_name="chats", on_delete=models.CASCADE
     )
-    title = models.TextField(default="")
+    title = models.TextField()
 
 
 class Message(models.Model):

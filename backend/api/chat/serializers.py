@@ -16,7 +16,7 @@ class ChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chat
-        fields = "id", "user_id", "messages"
+        fields = "id", "user_id", "title", "messages"
 
     def get_messages(self, chat: Chat):
         messages = chat.messages.all().order_by("index")
