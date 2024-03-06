@@ -34,8 +34,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     model = models.CharField(max_length=250)
+    info = models.TextField(max_length=1000)
 
     objects = UserManager()
+
+    chats: models.QuerySet = None
 
     USERNAME_FIELD = "email"
 

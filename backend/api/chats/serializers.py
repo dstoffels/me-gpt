@@ -12,12 +12,8 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class ChatSerializer(serializers.ModelSerializer):
-    messages = serializers.SerializerMethodField()
+    messages = MessageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Chat
         fields = "id", "user_id", "title", "messages"
-
-    def get_messages(self, chat: Chat):
-        messages = chat.messages.all().order_by("index")
-        return MessageSerializer(messages, many=True).data

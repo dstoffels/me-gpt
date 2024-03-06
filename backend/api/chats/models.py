@@ -8,14 +8,19 @@ class Chat(models.Model):
     )
     title = models.TextField()
 
+    messages: models.QuerySet = None
+
 
 class Message(models.Model):
-    ROLES = ["system", "user", "assistant"]
+    ROLES = ["user", "assistant"]
     chat = models.ForeignKey(Chat, related_name="messages", on_delete=models.CASCADE)
     index = models.PositiveIntegerField()
     role = models.CharField(max_length=10, choices=[(role, role) for role in ROLES])
     content = models.TextField()
     last_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["index"]
 
     def save(self, *args, **kwargs) -> None:
         """The message model automates indexing on save to ensure proper ordering within its chat"""
