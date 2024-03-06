@@ -19,4 +19,5 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class UserSerializer(RegistrationSerializer):
     class Meta:
-        fields = "email", "password", 'model'
+        model = User
+        fields = 'id', "email", "password", 'model'
